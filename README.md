@@ -25,9 +25,9 @@ your editor through Unreal's standard MCP endpoint.
 > ⚠️ **VibeUE requires Unreal's native MCP to be set up first** — enable the **Unreal MCP** plugin
 > (which auto-enables **Toolset Registry**) and the **Editor Tools** plugin, then start the MCP server.
 > Follow Epic's guide: **[Unreal MCP in the Unreal Editor](https://dev.epicgames.com/documentation/unreal-engine/unreal-mcp-in-unreal-editor)**.
-> VibeUE then expands that endpoint — **no separate server and no in-editor chat.** A free API key
-> (set in **Editor Preferences → Plugins → VibeUE**) unlocks the real-world **terrain** tools; everything
-> else works without one.
+> VibeUE then expands that endpoint — **no separate server and no in-editor chat.** This fork is
+> **keyless**: the cloud `terrain_data` tool (real-world GPS heightmaps) is **disabled** because it
+> required a vibeue.com key, which this fork removes — every other feature works with no key.
 
 ---
 
@@ -37,7 +37,8 @@ Unreal 5.8 ships its own AI toolsets (Blueprints, materials, actors, assets, mes
 VibeUE **complements** them — it focuses on the domains and depth the engine doesn't cover:
 
 - **Terrain & world** — Landscape sculpting/heightmaps/splines, landscape auto-materials + RVT,
-  Foliage, procedural FPS **Map Blockout**, and **real-world terrain** (heightmaps + water from GPS).
+  Foliage, and procedural FPS **Map Blockout**. (Real-world terrain from GPS — the `terrain_data`
+  tool — is **disabled in this keyless fork**.)
 - **Audio** — MetaSound and SoundCue graph authoring.
 - **Animation assets** — AnimSequence keyframe editing, AnimMontage authoring, AnimBP state machines,
   Skeleton bone/socket/retarget/blend-profile editing.
@@ -93,7 +94,7 @@ VibeUE plugs into three native UE 5.8+ systems:
    methods are callable from Python as `unreal.<Name>Service.<method>()`.
 2. **MCP server** (`ModelContextProtocol`) — a small set of VibeUE utility tools are registered
    directly on the endpoint: `execute_python_code`, `discover_python_module`/`_class`/`_function`,
-   `list_python_subsystems`, `deep_research`, `terrain_data`.
+   `list_python_subsystems`, `deep_research`, `terrain_data` (disabled — keyless fork).
 3. **Skills** (`AgentSkillToolset`) — ~34 markdown skill packs register as native `UAgentSkill`s,
    discoverable via `ListSkills` and loaded lazily via `GetSkills`, alongside the engine's own skills.
 
@@ -159,7 +160,7 @@ don't resolve imports, so they always get a copy).
 > The MCP server is loopback-only with no authentication — same-machine use only (per Epic's docs).
 
 The guide teaches: discover before you call (`discover_python_class`), batch with `execute_python_code`,
-load skills via `ListSkills`/`GetSkills`, and when to reach for `deep_research` / `terrain_data`.
+load skills via `ListSkills`/`GetSkills`, and when to reach for `deep_research` / `terrain_data` (disabled — keyless fork).
 
 ---
 

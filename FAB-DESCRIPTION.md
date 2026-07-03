@@ -32,13 +32,12 @@ VibeUE expands Unreal's native MCP, so set that up first (enable the Unreal MCP,
 
 🔑 API KEY:
 
-VibeUE works without a key. A free API key (grab one at vibeue.com/login, set it in Editor Preferences → Plugins → VibeUE) unlocks only the real-world terrain tools — every other feature works without one.
+This fork is keyless; the cloud terrain tool is disabled. The real-world terrain_data tool required a vibeue.com key, which this fork removes — every other feature works with no key.
 
 
 📚 RESOURCES:
 
 • Project home: https://www.vibeue.com/v5-8
-• Free API key: https://www.vibeue.com/login
 
 
 Requirements: Win64 · Unreal Engine 5.8+ · Unreal's native MCP stack enabled (Unreal MCP, Toolset Registry, Editor Tools). VibeUE auto-enables the engine plugins its services need: Python Script Plugin, EditorScriptingUtilities, Enhanced Input, Niagara, MetaSound, MeshModelingToolset, ModelViewViewModel, StateTree, GameplayTagsEditor, plus ToolsetRegistry and ModelContextProtocol.

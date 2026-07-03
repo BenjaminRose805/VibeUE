@@ -80,7 +80,7 @@ You get the full `unreal.*` API plus every `unreal.<Service>` VibeUE adds. Reser
 | `describe_toolset` / `list_toolsets` | Discover engine toolsets and their actions/args |
 | `discover_python_class` / `discover_python_function` / `discover_python_module` | Get live signatures before writing code |
 | `list_python_subsystems` | Enumerate editor subsystems for `unreal.get_editor_subsystem(...)` |
-| `terrain_data` | Real-world heightmaps + water splines (see `terrain-data` skill) |
+| `terrain_data` | Real-world heightmaps + water splines (see `terrain-data` skill) — **(disabled — keyless fork)** |
 | `deep_research` | Web research / page fetch / geocoding |
 
 ## Engine toolsets replace the old VibeUE tools

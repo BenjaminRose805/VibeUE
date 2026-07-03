@@ -13,7 +13,7 @@ Dependencies — VibeUE declares and auto-enables every engine plugin it needs: 
 Setup -  run console command VibeUE.GenerateAgentConfig [ClaudeCode|Gemini|Codex|Cursor|Copilot|All] to write the agent guide to the matching project file (CLAUDE.md, GEMINI.md, AGENTS.md, .github/copilot-instructions.md). 
 
 
-A free API  key (vibeue.com/login), set in Editor Preferences → Plugins → VibeUE, unlocks the real-world terrain tools; every other feature works without it.
+This fork is keyless; the cloud terrain tool is disabled. The real-world terrain_data tool required a vibeue.com key, which this fork removes — every other feature works with no key.
 
 
 Docs: https://www.vibeue.com/v5-8

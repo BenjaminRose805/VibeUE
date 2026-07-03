@@ -2,7 +2,7 @@
 //
 // TerrainDataTools.cpp
 // MCP tool: terrain_data — generate heightmaps and map images from real-world terrain data.
-// Calls vibeue.com terrain API endpoints authenticated with the user's VibeUE API key.
+// KEYLESS FORK (prompt-2.6): the vibeue.com API key + its editor setting were removed; this cloud tool self-disables.
 
 #include "Core/ToolRegistry.h"
 #include "Json.h"
@@ -15,7 +15,6 @@
 #include "Misc/Paths.h"
 #include "HAL/PlatformProcess.h"
 #include "HAL/PlatformFileManager.h"
-#include "Settings/VibeUEEditorSettings.h"
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -79,17 +78,11 @@ static bool ExtractTerrainBool(const TMap<FString, FString>& Params, const FStri
 
 static FString GetVibeUEApiKey()
 {
-	// Primary: Editor Preferences > Plugins > VibeUE (UVibeUEEditorSettings::ApiKey).
-	if (const UVibeUEEditorSettings* Settings = GetDefault<UVibeUEEditorSettings>())
-	{
-		if (!Settings->ApiKey.IsEmpty())
-			return Settings->ApiKey;
-	}
-
-	// Backward-compat: the legacy [VibeUE] VibeUEApiKey key written by older builds.
-	FString Key;
-	GConfig->GetString(TEXT("VibeUE"), TEXT("VibeUEApiKey"), Key, GEditorPerProjectIni);
-	return Key;
+	// KEYLESS FORK (prompt-2.6): the vibeue.com API key and its editor setting
+	// (UVibeUEEditorSettings) were removed. This intentionally returns empty, so every
+	// terrain_data entry-point below self-disables via its `ApiKey.IsEmpty()` guard.
+	// The harness never uses terrain_data; the whole stack (native MCP + this fork) is keyless.
+	return FString();
 }
 
 static FString GetTerrainBaseUrl()
@@ -268,7 +261,7 @@ static FString ActionGetWaterFeatures(const TMap<FString, FString>& Params)
 {
 	const FString ApiKey = GetVibeUEApiKey();
 	if (ApiKey.IsEmpty())
-		return BuildErrorJson(TEXT("NO_API_KEY"), TEXT("No VibeUE API key configured. Set it in Editor Preferences > Plugins > VibeUE (get a free key at https://www.vibeue.com/login)."));
+		return BuildErrorJson(TEXT("NO_API_KEY"), TEXT("terrain_data is disabled in this keyless fork (the vibeue.com cloud key was removed). Import your own heightmap instead - see the landscape skill."));
 
 	const double Lng = ExtractTerrainDouble(Params, TEXT("lng"), 0.0);
 	const double Lat = ExtractTerrainDouble(Params, TEXT("lat"), 0.0);
@@ -515,7 +508,7 @@ static FString ActionGenerateHeightmap(const TMap<FString, FString>& Params)
 {
 	const FString ApiKey = GetVibeUEApiKey();
 	if (ApiKey.IsEmpty())
-		return BuildErrorJson(TEXT("NO_API_KEY"), TEXT("No VibeUE API key configured. Set it in Editor Preferences > Plugins > VibeUE (get a free key at https://www.vibeue.com/login)."));
+		return BuildErrorJson(TEXT("NO_API_KEY"), TEXT("terrain_data is disabled in this keyless fork (the vibeue.com cloud key was removed). Import your own heightmap instead - see the landscape skill."));
 
 	const double Lng = ExtractTerrainDouble(Params, TEXT("lng"), 0.0);
 	const double Lat = ExtractTerrainDouble(Params, TEXT("lat"), 0.0);
@@ -620,7 +613,7 @@ static FString ActionPreviewElevation(const TMap<FString, FString>& Params)
 {
 	const FString ApiKey = GetVibeUEApiKey();
 	if (ApiKey.IsEmpty())
-		return BuildErrorJson(TEXT("NO_API_KEY"), TEXT("No VibeUE API key configured. Set it in Editor Preferences > Plugins > VibeUE."));
+		return BuildErrorJson(TEXT("NO_API_KEY"), TEXT("terrain_data is disabled in this keyless fork (the vibeue.com cloud key was removed). Import your own heightmap instead - see the landscape skill."));
 
 	const double Lng = ExtractTerrainDouble(Params, TEXT("lng"), 0.0);
 	const double Lat = ExtractTerrainDouble(Params, TEXT("lat"), 0.0);
@@ -662,7 +655,7 @@ static FString ActionGetMapImage(const TMap<FString, FString>& Params)
 {
 	const FString ApiKey = GetVibeUEApiKey();
 	if (ApiKey.IsEmpty())
-		return BuildErrorJson(TEXT("NO_API_KEY"), TEXT("No VibeUE API key configured. Set it in Editor Preferences > Plugins > VibeUE."));
+		return BuildErrorJson(TEXT("NO_API_KEY"), TEXT("terrain_data is disabled in this keyless fork (the vibeue.com cloud key was removed). Import your own heightmap instead - see the landscape skill."));
 
 	const double Lng     = ExtractTerrainDouble(Params, TEXT("lng"),      0.0);
 	const double Lat     = ExtractTerrainDouble(Params, TEXT("lat"),      0.0);
