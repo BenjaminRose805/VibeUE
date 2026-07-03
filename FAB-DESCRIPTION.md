@@ -15,7 +15,7 @@ Unreal Engine 5.8 added a built-in MCP server and AI toolsets. VibeUE is an MCP 
 
 • ⚡ Performance & profiling (flagship) — frame timing with a CPU-vs-GPU-bound verdict, Unreal Insights trace capture, and a trace+log analyser. Epic's toolsets can start PIE but can't measure anything.
 • ↩️ Editor undo / redo — a Transaction toolset to group many edits into one undo step, roll back, and inspect history. Epic ships no transaction toolset.
-• 🌍 Terrain & world — Landscape sculpting/heightmaps/splines, landscape auto-materials + Runtime Virtual Texture, Foliage, procedural Map Blockout, and real-world heightmaps + water features from GPS coordinates.
+• 🌍 Terrain & world — Landscape sculpting/heightmaps/splines, landscape auto-materials + Runtime Virtual Texture, Foliage, and procedural Map Blockout. (Real-world heightmaps + water from GPS — the terrain_data tool — is disabled in this keyless fork.)
 • 🎬 Animation — AnimSequence keyframe editing, AnimMontage authoring, AnimBP state machines, and Skeleton bone/socket/retarget/blend-profile editing.
 • 🎆 Niagara depth — emitter color/curve authoring and Custom-HLSL scratch-pad modules.
 • 🎵 Audio — SoundCue and MetaSound graph authoring (create sources, add/wire DSP nodes, set defaults, manage graph I/O).
